@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdio.h>
+#include <string.h>
 
 I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart2;
@@ -10,8 +12,10 @@ static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
 
-uint8_t *MSG_1 = "Led Switched OFF\n";
-uint8_t *MSG_2 = "Led Switched ON\n";
+char *MSG_1 = "Im going off buddy\n";
+char *MSG_2 = "Back on woohoo\n";
+char buffer[30];
+
 
 /**
   * @brief System Clock Configuration
@@ -206,12 +210,12 @@ int main(void)
 
   while (1)
   {
-    HAL_Delay(5000);
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5,0);
-    HAL_UART_Transmit(&huart2,MSG_1,17, 100);
-    HAL_Delay(5000);
+    HAL_UART_Transmit(&huart2,MSG_1,strlen(MSG_1), 100);
+    HAL_Delay(1000);
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5,1);
-    HAL_UART_Transmit(&huart2,MSG_2,16, 100);
+    HAL_UART_Transmit(&huart2,buffer,sizeof(buffer), 100);
+    HAL_UART_Transmit(&huart2,MSG_2,strlen(MSG_2), 100);
   }
 }
 
