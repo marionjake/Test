@@ -2,6 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "cwd": "${workspaceFolder}",
+      "executable": "build/debug/build/Test.elf",
+      "name": "cortex-debug",
+      "request": "launch",
+      "type": "cortex-debug",
+      "runToEntryPoint": "main",
+      "showDevDebugOutput": "none",
+      "servertype": "openocd",
+      "configFiles": [
+        "interface/stlink.cfg",
+        "target/stm32f0x.cfg"
+      ]
+    },
+    {
       "name": "Launch",
       "type": "cppdbg",
       "request": "launch",
